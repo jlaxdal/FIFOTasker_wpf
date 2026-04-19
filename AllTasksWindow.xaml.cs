@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -19,9 +21,15 @@ namespace FIFOTasker_wpf
 
         private void LoadAllTasks()
         {
-            var tasks = _taskService.GetAllTasks();
-            lvAllTasks.ItemsSource = tasks;
+            var allTasks = _taskService.GetAllTasks();
 
+            // Unfinished tasks first (FIFO order), then finished tasks
+            var unfinished = allTasks.Where(t => t.Finished == null).ToList();
+            var finished = allTasks.Where(t => t.Finished != null).ToList();
+
+            var combined = unfinished.Concat(finished).ToList();
+
+            lvAllTasks.ItemsSource = combined;
 
             // Grey out finished tasks
             lvAllTasks.ItemContainerStyle = new Style(typeof(System.Windows.Controls.ListViewItem));
@@ -39,10 +47,9 @@ namespace FIFOTasker_wpf
         {
             public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
             {
-                if (value is DateTime finished && finished != default)
-                    return new SolidColorBrush(Colors.Gray);
-
-                return new SolidColorBrush(Colors.Black);
+                return (value is DateTime finished && finished != default(DateTime))
+                    ? new SolidColorBrush(Colors.Gray)
+                    : new SolidColorBrush(Colors.Black);
             }
 
             public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

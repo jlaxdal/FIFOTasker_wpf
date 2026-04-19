@@ -13,7 +13,7 @@
 
         <!-- Task List -->
         <ListView x:Name="lvTasks" Grid.Row="0" Margin="0,0,0,12" 
-                  SelectionMode="Single" MouseDoubleClick="LvTasks_MouseDoubleClick">
+                  SelectionMode="Single">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Summary" Width="380">
@@ -27,9 +27,9 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Content="[!]" Width="40" Height="24" 
-                    Click="Escalate_Click" Tag="{Binding Id}"
-                    Background="#444444" Foreground="#FFAA00"
-                    IsEnabled="{Binding IsNotActive}"/>
+                                        Click="Escalate_Click" Tag="{Binding Id}"
+                                        Background="#444444" Foreground="#FFAA00"
+                                        IsEnabled="{Binding IsNotActive}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -37,11 +37,13 @@
             </ListView.View>
         </ListView>
 
-        <!-- Active Task Details -->
+        <!-- Active Task Details - max 6 lines -->
         <GroupBox Grid.Row="1" Header="Active Task Details" Padding="8">
-            <ScrollViewer Height="120" VerticalScrollBarVisibility="Auto">
-                <TextBlock x:Name="txtActiveDetails" TextWrapping="Wrap" 
-                           Text="No active task" />
+            <ScrollViewer Height="132" VerticalScrollBarVisibility="Auto">
+                <TextBlock x:Name="txtActiveDetails" 
+                           TextWrapping="Wrap" 
+                           MaxHeight="132"
+                           TextTrimming="CharacterEllipsis"/>
             </ScrollViewer>
         </GroupBox>
     </Grid>
