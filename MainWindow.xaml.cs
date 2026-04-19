@@ -42,6 +42,19 @@ namespace FIFOTasker_wpf
             RefreshMainWindow();
         }
 
+        private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                DragMove();
+        }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // Prevent closing via X button - force use of tray Exit
+            e.Cancel = true;
+            Hide();   // just hide main window instead of closing
+        }
+
         private void HandleFirstRun()
         {
             if (_configService.IsFirstRun())
@@ -99,18 +112,7 @@ namespace FIFOTasker_wpf
             System.Windows.Application.Current.Shutdown();
         }
 
-        private void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-                DragMove();
-        }
 
-        private void MainWindow_Closing(object sender, CancelEventArgs e)
-        {
-            // Prevent closing via X button - force use of tray Exit
-            e.Cancel = true;
-            Hide();   // just hide main window instead of closing
-        }
 
         public void RefreshMainWindow()
         {
