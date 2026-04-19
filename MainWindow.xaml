@@ -1,0 +1,46 @@
+﻿<Window x:Class="FIFOTasker_wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="FIFOTasker" Height="54" Width="520"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        Topmost="True" ShowInTaskbar="False" ResizeMode="NoResize">
+
+    <Border Background="#F5F5F5" CornerRadius="4" BorderThickness="1" BorderBrush="#CCCCCC">
+        <Grid Margin="10,7">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="txtActiveTask" 
+                       Text="No active task" 
+                       VerticalAlignment="Center"
+                       FontSize="14" Foreground="#1E1E1E"
+                       TextTrimming="CharacterEllipsis"
+                       Margin="4,0,12,0" />
+
+            <TextBlock Grid.Column="1" x:Name="txtCount" 
+                       Text="0" 
+                       VerticalAlignment="Center" 
+                       FontSize="14" Foreground="#555555"
+                       Margin="8,0,16,0" />
+
+            <Button Grid.Column="2" x:Name="btnFinish" Content="✔" Width="36" Height="36"
+                    FontSize="18" Background="#006400" Foreground="White"
+                    Click="BtnFinish_Click" IsEnabled="False"
+                    Margin="0,0,4,0" />
+
+            <Button Grid.Column="3" x:Name="btnExpand" Content="↑" Width="36" Height="36"
+                    FontSize="18" Background="#E5E5E5" Foreground="#333333"
+                    Click="BtnExpand_Click" 
+                    Margin="0,0,4,0" />
+
+            <Button Grid.Column="4" x:Name="btnAdd" Content="+" Width="36" Height="36"
+                    FontSize="20" Background="#E5E5E5" Foreground="#333333"
+                    Click="BtnAdd_Click" />
+        </Grid>
+    </Border>
+</Window>

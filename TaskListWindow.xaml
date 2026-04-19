@@ -1,0 +1,48 @@
+﻿<Window x:Class="FIFOTasker_wpf.TaskListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Next Tasks" Height="460" Width="520"
+        WindowStyle="SingleBorderWindow" ResizeMode="CanResize"
+        WindowStartupLocation="CenterOwner">
+
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Task List -->
+        <ListView x:Name="lvTasks" Grid.Row="0" Margin="0,0,0,12" 
+                  SelectionMode="Single" MouseDoubleClick="LvTasks_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Summary" Width="380">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Summary}" TextTrimming="CharacterEllipsis"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="" Width="60">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="[!]" Width="40" Height="24" 
+                    Click="Escalate_Click" Tag="{Binding Id}"
+                    Background="#444444" Foreground="#FFAA00"
+                    IsEnabled="{Binding IsNotActive}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!-- Active Task Details -->
+        <GroupBox Grid.Row="1" Header="Active Task Details" Padding="8">
+            <ScrollViewer Height="120" VerticalScrollBarVisibility="Auto">
+                <TextBlock x:Name="txtActiveDetails" TextWrapping="Wrap" 
+                           Text="No active task" />
+            </ScrollViewer>
+        </GroupBox>
+    </Grid>
+</Window>
