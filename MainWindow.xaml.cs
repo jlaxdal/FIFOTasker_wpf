@@ -72,15 +72,17 @@ namespace FIFOTasker_wpf
 
         private void SetupTrayIcon()
         {
-            string icoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "FIFOTasker.ico");
+            //string icoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "FIFOTasker.ico");
 
             _notifyIcon = new NotifyIcon
             {
-                Icon = File.Exists(icoPath)
-            ? new System.Drawing.Icon(icoPath)
-            : System.Drawing.Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetExecutingAssembly().Location),
-                Text = "FIFOTasker",
-                Visible = true
+                //Icon = File.Exists(icoPath)
+                //? new System.Drawing.Icon(icoPath)
+                //: System.Drawing.Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetExecutingAssembly().Location),
+                Icon = System.Drawing.Icon.ExtractAssociatedIcon(
+                    System.Reflection.Assembly.GetExecutingAssembly().Location),
+                    Text = "FIFOTasker",
+                    Visible = true
             };
 
             var contextMenu = new ContextMenuStrip();
